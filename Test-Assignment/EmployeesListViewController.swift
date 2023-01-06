@@ -1,13 +1,6 @@
-//
-//  ViewController.swift
-//  Test-Assignment
-//
-//  Created by Elina Mansurova on 2023-01-05.
-//
-
 import UIKit
 
-class ViewController: UIViewController {
+class EmployeesListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

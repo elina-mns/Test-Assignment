@@ -1,19 +1,17 @@
-//
-//  AppDelegate.swift
-//  Test-Assignment
-//
-//  Created by Elina Mansurova on 2023-01-05.
-//
-
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let employeesListViewController = EmployeesListViewController()
+        let navigationController = UINavigationController(rootViewController: employeesListViewController)
+        navigationController.navigationBar.prefersLargeTitles = true
+        window?.makeKeyAndVisible()
+        window?.rootViewController = navigationController
         return true
     }
 
