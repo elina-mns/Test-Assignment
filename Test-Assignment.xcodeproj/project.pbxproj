@@ -17,6 +17,7 @@
 		314DEFC02967C6870013DFE7 /* Test_AssignmentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DEFBF2967C6870013DFE7 /* Test_AssignmentUITests.swift */; };
 		314DEFC22967C6870013DFE7 /* Test_AssignmentUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DEFC12967C6870013DFE7 /* Test_AssignmentUITestsLaunchTests.swift */; };
 		314DEFD02967CA730013DFE7 /* EmployeeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DEFCF2967CA730013DFE7 /* EmployeeModel.swift */; };
+		314DEFD22967CDC40013DFE7 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DEFD12967CDC40013DFE7 /* EmployeeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		314DEFBF2967C6870013DFE7 /* Test_AssignmentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_AssignmentUITests.swift; sourceTree = "<group>"; };
 		314DEFC12967C6870013DFE7 /* Test_AssignmentUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test_AssignmentUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		314DEFCF2967CA730013DFE7 /* EmployeeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeModel.swift; sourceTree = "<group>"; };
+		314DEFD12967CDC40013DFE7 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				314DEF9E2967C6860013DFE7 /* AppDelegate.swift */,
 				314DEFA02967C6860013DFE7 /* SceneDelegate.swift */,
 				314DEFA22967C6860013DFE7 /* EmployeesListViewController.swift */,
+				314DEFD12967CDC40013DFE7 /* EmployeeTableViewCell.swift */,
 				314DEFA42967C6860013DFE7 /* Main.storyboard */,
 				314DEFA72967C6870013DFE7 /* Assets.xcassets */,
 				314DEFA92967C6870013DFE7 /* LaunchScreen.storyboard */,
@@ -272,6 +275,7 @@
 				314DEFA32967C6860013DFE7 /* EmployeesListViewController.swift in Sources */,
 				314DEF9F2967C6860013DFE7 /* AppDelegate.swift in Sources */,
 				314DEFA12967C6860013DFE7 /* SceneDelegate.swift in Sources */,
+				314DEFD22967CDC40013DFE7 /* EmployeeTableViewCell.swift in Sources */,
 				314DEFD02967CA730013DFE7 /* EmployeeModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
