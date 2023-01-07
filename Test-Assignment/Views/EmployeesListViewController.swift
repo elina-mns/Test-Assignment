@@ -39,12 +39,32 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
                 self.refreshControl.endRefreshing()
                 switch result {
                 case .failure:
-                    self.showAlert(title: "Error", message: "Couldn't perform the request this time.", okAction: nil)
+                    self.showAlert(title: "Error", message: "Couldn't load employees list.", okAction: nil)
                 case .success(let response):
                     self.employeesList = response
+                    if self.employeesList == nil {
+                        self.loadEmptyList()
+                    }
                     self.tableView.reloadData()
                     self.activityIndicator.stopAnimating()
                 }
+            }
+        }
+    }
+    
+    func loadEmptyList() {
+        self.refreshControl.beginRefreshing()
+        EmployeeListAPI.fetchEmptyList { result in
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+                switch result {
+                case .failure:
+                    self.showAlert(title: "Error", message: "Couldn't load empty list.", okAction: nil)
+                case .success(let response):
+                    self.employeesList = response
+                }
+                self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
             }
         }
     }
@@ -57,7 +77,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let employeesList else { return 0 }
+        guard let employeesList else { return 1 }
         return employeesList.employees.count
     }
     
@@ -81,10 +101,3 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
         return cell
     }
 }
-
-extension String {
-    public func toPhoneNumber() -> String {
-        return self.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "($1) $2-$3", options: .regularExpression, range: nil)
-    }
-}
-
