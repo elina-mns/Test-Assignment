@@ -1,23 +1,5 @@
 import Foundation
 
-/* {
-     "employees" : [
-       {
-         "uuid" : "some-uuid",
-         "full_name" : "Eric Rogers",
-         "phone_number" : "5556669870",
-         "email_address" : "erogers.demo@squareup.com",
-         "biography" : "A short biography describing the employee.",
-         "photo_url_small" : "https://some.url/path1.jpg",
-         "photo_url_large" : "https://some.url/path2.jpg",
-         "team" : "Seller",
-         "employee_type" : "FULL_TIME",
-       },
-       ...
-     ]
-   }
-*/
-
 struct EmployeesListModel: Decodable {
     let employees: [EmployeeModel]
 }
@@ -30,8 +12,7 @@ struct EmployeeModel: Decodable {
     let smallPhotoURL: String
     let largePhotoURL: String
     let team: String
-    let employeeType: String
-    
+    let employeeType: EmployeeType
     
     enum CodingKeys: String, CodingKey {
         case fullName = "full_name"
@@ -42,5 +23,22 @@ struct EmployeeModel: Decodable {
         case largePhotoURL = "photo_url_large"
         case team
         case employeeType = "employee_type"
+    }
+
+    enum EmployeeType: String, Codable {
+        case fullTime = "FULL_TIME"
+        case partTime = "PART_TIME"
+        case contractor = "CONTRACTOR"
+        
+        var description: String {
+            switch self {
+            case .fullTime:
+                return "Full Time"
+            case .partTime:
+                return "Part Time"
+            case .contractor:
+                return "Contractor"
+            }
+        }
     }
 }

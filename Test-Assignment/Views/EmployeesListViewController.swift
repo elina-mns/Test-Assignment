@@ -60,28 +60,23 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeTableViewCell", for: indexPath) as? EmployeeTableViewCell else {
             fatalError("Couldn't configure the cell this time. Table View Cell should be registered.")
         }
-        let employeesList = employeesList?.employees[indexPath.row]
-        
-        cell.fullName.text = employeesList?.fullName
-        cell.phoneNumber.text = employeesList?.phoneNumber
-        cell.email.text = employeesList?.emailAddress
-        cell.biography.text = employeesList?.biography
-        cell.team.text = employeesList?.team
-        cell.employeeType.text = employeesList?.employeeType
-        
-        cell.employeeLargeImage.image = UIImage(systemName: "person.crop.circle.badge.exclamationmark")
-        if let employeeImage = URL(string: employeesList?.largePhotoURL ?? "") {
-            cell.employeeLargeImage.downloadImage(from: employeeImage) { (image) in
-                if image != nil {
-                    cell.employeeLargeImage.image = image
+        if let employeesList = employeesList?.employees[indexPath.row] {
+            cell.fullName.text = "Name: \(employeesList.fullName)"
+            cell.phoneNumber.text = "Phone number: \(employeesList.phoneNumber)"
+            cell.email.text = "Email: \(employeesList.emailAddress)"
+            cell.biography.text = "Biography: \(employeesList.biography)"
+            cell.team.text = "Team: \(employeesList.team)"
+            cell.employeeType.text = "Employee type: \(employeesList.employeeType.description)"
+            cell.employeeLargeImage.image = UIImage(systemName: "person.crop.circle.badge.exclamationmark")
+            if let employeeImage = URL(string: employeesList.largePhotoURL) {
+                cell.employeeLargeImage.downloadImage(from: employeeImage) { (image) in
+                    if image != nil {
+                        cell.employeeLargeImage.image = image
+                    }
                 }
             }
         }
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
 }
 

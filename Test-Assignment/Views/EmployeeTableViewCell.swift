@@ -31,6 +31,8 @@ class EmployeeTableViewCell: UITableViewCell {
     var biography: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     var team: UILabel = {
@@ -60,7 +62,7 @@ class EmployeeTableViewCell: UITableViewCell {
             employeeSmallImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             employeeSmallImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
 
-            rightAnchor.constraint(greaterThanOrEqualTo: fullName.rightAnchor, constant: 20)
+            leadingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: 20)
         ])
 
         employeeSmallImage.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -79,7 +81,7 @@ class EmployeeTableViewCell: UITableViewCell {
         
         biography.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 20).isActive = true
         biography.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        biography.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        biography.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
         
         team.topAnchor.constraint(equalTo: biography.bottomAnchor, constant: 20).isActive = true
         team.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
@@ -88,7 +90,7 @@ class EmployeeTableViewCell: UITableViewCell {
         employeeType.topAnchor.constraint(equalTo: team.bottomAnchor, constant: 20).isActive = true
         employeeType.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         employeeType.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
-        employeeType.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 20).isActive = true
+        employeeType.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
     }
     
     required init?(coder: NSCoder) {
