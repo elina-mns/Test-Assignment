@@ -4,6 +4,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     let activityIndicator = UIActivityIndicatorView(style: .medium)
     var employeesList: EmployeesListModel?
     var tableView = UITableView()
+    let placeholderImage = UIImage(systemName: "person.crop.circle.badge.exclamationmark")
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -16,6 +17,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
         super.viewDidLoad()
         setupTableView()
         loadData()
+        title = "Employees"
     }
     
     func setupTableView() {
@@ -67,13 +69,9 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
             cell.biography.text = "Biography: \(employeesList.biography)"
             cell.team.text = "Team: \(employeesList.team)"
             cell.employeeType.text = "Employee type: \(employeesList.employeeType.description)"
-            cell.employeeLargeImage.image = UIImage(systemName: "person.crop.circle.badge.exclamationmark")
-            if let employeeImage = URL(string: employeesList.largePhotoURL) {
-                cell.employeeSmallImage.downloadImage(from: employeeImage) { (image) in
-                    if image != nil {
-                        cell.employeeSmallImage.image = image
-                    }
-                }
+            cell.employeeImage.image = placeholderImage
+            if let employeeImage = URL(string: employeesList.smallPhotoURL) {
+                cell.employeeImage.downloadImage(from: employeeImage, placeholder: placeholderImage)
             }
         }
         return cell

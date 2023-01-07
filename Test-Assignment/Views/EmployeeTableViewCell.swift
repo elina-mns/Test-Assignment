@@ -1,21 +1,16 @@
 import UIKit
 
 class EmployeeTableViewCell: UITableViewCell {
-    var employeeSmallImage: UIImageView = {
+    var employeeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 20
         imageView.contentMode = .scaleAspectFit
+        imageView.tintColor = .gray
         return imageView
     }()
-    var employeeLargeImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 20
-        return imageView
-    }()
+
     var fullName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,7 +48,7 @@ class EmployeeTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(employeeSmallImage)
+        addSubview(employeeImage)
         addSubview(fullName)
         addSubview(phoneNumber)
         addSubview(email)
@@ -62,18 +57,18 @@ class EmployeeTableViewCell: UITableViewCell {
         addSubview(employeeType)
         
         NSLayoutConstraint.activate([
-            employeeSmallImage.widthAnchor.constraint(equalToConstant: 120),
-            employeeSmallImage.widthAnchor.constraint(equalTo: employeeSmallImage.heightAnchor),
-            employeeSmallImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            employeeSmallImage.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            employeeImage.widthAnchor.constraint(equalToConstant: 120),
+            employeeImage.widthAnchor.constraint(equalTo: employeeImage.heightAnchor),
+            employeeImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            employeeImage.topAnchor.constraint(equalTo: topAnchor, constant: 20),
 
-            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: -15),
-            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: team.leadingAnchor, constant: -15),
-            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: employeeType.leadingAnchor, constant: -15),
-            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: phoneNumber.leadingAnchor, constant: -15)
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: -15),
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: team.leadingAnchor, constant: -15),
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: employeeType.leadingAnchor, constant: -15),
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: phoneNumber.leadingAnchor, constant: -15)
         ])
 
-        employeeSmallImage.setContentCompressionResistancePriority(.required, for: .horizontal)
+        employeeImage.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         fullName.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         fullName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
@@ -87,7 +82,7 @@ class EmployeeTableViewCell: UITableViewCell {
         phoneNumber.topAnchor.constraint(equalTo: employeeType.bottomAnchor, constant: 10).isActive = true
         phoneNumber.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
         
-        email.topAnchor.constraint(equalTo: employeeSmallImage.bottomAnchor, constant: 15).isActive = true
+        email.topAnchor.constraint(equalTo: employeeImage.bottomAnchor, constant: 15).isActive = true
         email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
         
