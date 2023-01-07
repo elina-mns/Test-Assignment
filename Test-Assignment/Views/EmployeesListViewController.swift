@@ -8,7 +8,6 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
         return refreshControl
     }()
@@ -22,6 +21,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     
     func setupTableView() {
         view.addSubview(tableView)
+        tableView.addSubview(refreshControl)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -33,12 +33,15 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     @objc func loadData() {
-        EmployeeListAPI.fetchEmployeesList { response, error in
+        self.refreshControl.beginRefreshing()
+        EmployeeListAPI.fetchEmployeesList { result in
             DispatchQueue.main.async {
-                if error != nil {
+                self.refreshControl.endRefreshing()
+                switch result {
+                case .failure:
                     self.showAlert(title: "Error", message: "Couldn't perform the request this time.", okAction: nil)
-                } else if let responseExpected = response {
-                    self.employeesList = responseExpected
+                case .success(let response):
+                    self.employeesList = response
                     self.tableView.reloadData()
                     self.activityIndicator.stopAnimating()
                 }
