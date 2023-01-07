@@ -64,7 +64,8 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
         }
         if let employeesList = employeesList?.employees[indexPath.row] {
             cell.fullName.text = "Name: \(employeesList.fullName)"
-            cell.phoneNumber.text = "Phone number: \(employeesList.phoneNumber)"
+            let formattedPhoneNumber = employeesList.phoneNumber.toPhoneNumber()
+            cell.phoneNumber.text = "Phone: \(formattedPhoneNumber)"
             cell.email.text = "Email: \(employeesList.emailAddress)"
             cell.biography.text = "Biography: \(employeesList.biography)"
             cell.team.text = "Team: \(employeesList.team)"
@@ -75,6 +76,12 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         return cell
+    }
+}
+
+extension String {
+    public func toPhoneNumber() -> String {
+        return self.replacingOccurrences(of: "(\\d{3})(\\d{3})(\\d+)", with: "($1) $2-$3", options: .regularExpression, range: nil)
     }
 }
 

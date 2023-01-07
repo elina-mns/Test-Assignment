@@ -7,7 +7,6 @@ class EmployeeTableViewCell: UITableViewCell {
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 20
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .gray
         return imageView
     }()
 
