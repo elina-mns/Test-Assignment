@@ -4,12 +4,15 @@ class EmployeeTableViewCell: UITableViewCell {
     var employeeSmallImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = 5
+        imageView.layer.masksToBounds = true
+        imageView.layer.cornerRadius = 20
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     var employeeLargeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 20
         return imageView
     }()
@@ -38,6 +41,8 @@ class EmployeeTableViewCell: UITableViewCell {
     var team: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     var employeeType: UILabel = {
@@ -57,40 +62,40 @@ class EmployeeTableViewCell: UITableViewCell {
         addSubview(employeeType)
         
         NSLayoutConstraint.activate([
-            employeeSmallImage.widthAnchor.constraint(equalToConstant: 20),
+            employeeSmallImage.widthAnchor.constraint(equalToConstant: 120),
             employeeSmallImage.widthAnchor.constraint(equalTo: employeeSmallImage.heightAnchor),
-            employeeSmallImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             employeeSmallImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            employeeSmallImage.topAnchor.constraint(equalTo: topAnchor, constant: 20),
 
-            leadingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: 20)
+            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: -15),
+            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: team.leadingAnchor, constant: -15),
+            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: employeeType.leadingAnchor, constant: -15),
+            employeeSmallImage.trailingAnchor.constraint(greaterThanOrEqualTo: phoneNumber.leadingAnchor, constant: -15)
         ])
 
         employeeSmallImage.setContentCompressionResistancePriority(.required, for: .horizontal)
         
         fullName.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-        fullName.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         fullName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
         
-        phoneNumber.topAnchor.constraint(equalTo: fullName.bottomAnchor, constant: 20).isActive = true
-        phoneNumber.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
+        team.topAnchor.constraint(equalTo: fullName.bottomAnchor, constant: 10).isActive = true
+        team.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        
+        employeeType.topAnchor.constraint(equalTo: team.bottomAnchor, constant: 10).isActive = true
+        employeeType.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        
+        phoneNumber.topAnchor.constraint(equalTo: employeeType.bottomAnchor, constant: 10).isActive = true
         phoneNumber.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
         
-        email.topAnchor.constraint(equalTo: phoneNumber.bottomAnchor, constant: 20).isActive = true
+        email.topAnchor.constraint(equalTo: employeeSmallImage.bottomAnchor, constant: 15).isActive = true
         email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
         
-        biography.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 20).isActive = true
+        biography.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 10).isActive = true
         biography.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
         biography.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        
-        team.topAnchor.constraint(equalTo: biography.bottomAnchor, constant: 20).isActive = true
-        team.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        team.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
-        
-        employeeType.topAnchor.constraint(equalTo: team.bottomAnchor, constant: 20).isActive = true
-        employeeType.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        employeeType.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
-        employeeType.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        biography.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {

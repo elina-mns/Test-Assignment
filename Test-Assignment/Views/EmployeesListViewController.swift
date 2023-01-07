@@ -52,8 +52,8 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard employeesList != nil else { return 0 }
-        return (employeesList?.employees.count)!
+        guard let employeesList else { return 0 }
+        return employeesList.employees.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -69,9 +69,9 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
             cell.employeeType.text = "Employee type: \(employeesList.employeeType.description)"
             cell.employeeLargeImage.image = UIImage(systemName: "person.crop.circle.badge.exclamationmark")
             if let employeeImage = URL(string: employeesList.largePhotoURL) {
-                cell.employeeLargeImage.downloadImage(from: employeeImage) { (image) in
+                cell.employeeSmallImage.downloadImage(from: employeeImage) { (image) in
                     if image != nil {
-                        cell.employeeLargeImage.image = image
+                        cell.employeeSmallImage.image = image
                     }
                 }
             }
