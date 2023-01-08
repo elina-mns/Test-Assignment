@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		314334052969373B00A37D54 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314334042969373B00A37D54 /* StringExtension.swift */; };
 		314334072969378400A37D54 /* ImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314334062969378400A37D54 /* ImageViewExtension.swift */; };
+		31433409296B3C5F00A37D54 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31433408296B3C5F00A37D54 /* EmptyStateView.swift */; };
 		314DEF9F2967C6860013DFE7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DEF9E2967C6860013DFE7 /* AppDelegate.swift */; };
 		314DEFA12967C6860013DFE7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DEFA02967C6860013DFE7 /* SceneDelegate.swift */; };
 		314DEFA32967C6860013DFE7 /* EmployeesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314DEFA22967C6860013DFE7 /* EmployeesListViewController.swift */; };
@@ -41,6 +42,7 @@
 /* Begin PBXFileReference section */
 		314334042969373B00A37D54 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		314334062969378400A37D54 /* ImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewExtension.swift; sourceTree = "<group>"; };
+		31433408296B3C5F00A37D54 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		314DEF9B2967C6860013DFE7 /* Test-Assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Test-Assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		314DEF9E2967C6860013DFE7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		314DEFA02967C6860013DFE7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				314DEFA22967C6860013DFE7 /* EmployeesListViewController.swift */,
 				314DEFD12967CDC40013DFE7 /* EmployeeTableViewCell.swift */,
+				31433408296B3C5F00A37D54 /* EmptyStateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31433409296B3C5F00A37D54 /* EmptyStateView.swift in Sources */,
 				314DEFA32967C6860013DFE7 /* EmployeesListViewController.swift in Sources */,
 				314334052969373B00A37D54 /* StringExtension.swift in Sources */,
 				314DEF9F2967C6860013DFE7 /* AppDelegate.swift in Sources */,

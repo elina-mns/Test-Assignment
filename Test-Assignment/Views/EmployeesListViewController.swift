@@ -4,6 +4,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     let activityIndicator = UIActivityIndicatorView(style: .medium)
     var employeesList: EmployeesListModel?
     var tableView = UITableView()
+    var emptyStateView = EmptyStateView()
     let placeholderImage = UIImage(systemName: "person.crop.circle.badge.exclamationmark")
     
     lazy var refreshControl: UIRefreshControl = {
@@ -21,7 +22,9 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     
     func setupTableView() {
         view.addSubview(tableView)
+        view.addSubview(emptyStateView)
         tableView.addSubview(refreshControl)
+        emptyStateView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -30,6 +33,13 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: "EmployeeTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
+        
+        NSLayoutConstraint.activate([
+            emptyStateView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyStateView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
+            emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
     }
     
     @objc func loadData() {
@@ -41,7 +51,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
                 case .failure:
                     self.showAlert(title: "Error", message: "Couldn't load employees list.", okAction: nil)
                 case .success(let response):
-                    self.employeesList = response
+                    //self.employeesList = response
                     if self.employeesList == nil {
                         self.loadEmptyList()
                     }
