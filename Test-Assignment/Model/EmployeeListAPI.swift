@@ -4,7 +4,6 @@ class EmployeeListAPI {
     
     enum APIError: Error {
         case badResponse
-        case emptyResponse
         case decodingError(Error)
     }
     

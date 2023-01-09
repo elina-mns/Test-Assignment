@@ -50,8 +50,10 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
                 switch result {
                 case .failure:
                     self.showAlert(title: "Error", message: "Couldn't load employees list.", okAction: nil)
+                    self.loadMalformedEmployeesList()
                 case .success(let response):
-                    //self.employeesList = response
+                    self.emptyStateView.isHidden = true
+                    self.employeesList = response
                     if self.employeesList == nil {
                         self.loadEmptyList()
                     }
@@ -72,6 +74,24 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
                     self.showAlert(title: "Error", message: "Couldn't load empty list.", okAction: nil)
                 case .success(let response):
                     self.employeesList = response
+                    self.emptyStateView.isHidden = false
+                }
+                self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
+    
+    func loadMalformedEmployeesList() {
+        self.refreshControl.beginRefreshing()
+        EmployeeListAPI.fetchMalformedEmployeesList { result in
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+                switch result {
+                case .failure:
+                    self.showAlert(title: "Error", message: "Couldn't load malformed employees list.", okAction: nil)
+                case .success(let response):
+                    self.employeesList = response
                 }
                 self.tableView.reloadData()
                 self.activityIndicator.stopAnimating()
@@ -87,7 +107,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let employeesList else { return 1 }
+        guard let employeesList else { return 0 }
         return employeesList.employees.count
     }
     
