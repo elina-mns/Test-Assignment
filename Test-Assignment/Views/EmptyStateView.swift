@@ -1,10 +1,17 @@
 import UIKit
 
 class EmptyStateView: UIView {
+    
+    private enum Constants {
+        static let emptyLabelText = "The list is empty."
+        static let emptyImageName = "exclamationmark.icloud"
+        static let emptyImageWidth = 150.0
+        static let emptyLabelTopPadding = 20.0
+    }
     var emptyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "The list is empty."
+        label.text = Constants.emptyLabelText
         label.textColor = .gray
         return label
     }()
@@ -12,7 +19,7 @@ class EmptyStateView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "exclamationmark.icloud")
+        imageView.image = UIImage(systemName: Constants.emptyImageName)
         imageView.tintColor = .gray
         return imageView
     }()
@@ -22,12 +29,12 @@ class EmptyStateView: UIView {
         addSubview(emptyStateImage)
         addSubview(emptyLabel)
         NSLayoutConstraint.activate([
-            emptyStateImage.widthAnchor.constraint(equalToConstant: 150),
+            emptyStateImage.widthAnchor.constraint(equalToConstant: Constants.emptyImageWidth),
             emptyStateImage.widthAnchor.constraint(equalTo: emptyStateImage.heightAnchor),
             emptyStateImage.centerYAnchor.constraint(equalTo: centerYAnchor),
             emptyStateImage.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
-        emptyLabel.topAnchor.constraint(equalTo: emptyStateImage.bottomAnchor, constant: 20).isActive = true
+        emptyLabel.topAnchor.constraint(equalTo: emptyStateImage.bottomAnchor, constant: Constants.emptyLabelTopPadding).isActive = true
         emptyLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         emptyStateImage.setContentCompressionResistancePriority(.required, for: .horizontal)
     }

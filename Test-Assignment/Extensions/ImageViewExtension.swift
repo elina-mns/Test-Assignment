@@ -1,7 +1,5 @@
 import UIKit
 
-let imageCache = NSCache<NSString, UIImage>()
-
 extension UIImageView {
     
     func downloadImage(from url: URL, placeholder: UIImage?) {

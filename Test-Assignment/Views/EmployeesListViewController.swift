@@ -1,23 +1,31 @@
 import UIKit
 
-class EmployeesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    let activityIndicator = UIActivityIndicatorView(style: .medium)
-    var employeesList: EmployeesListModel?
-    var tableView = UITableView()
-    var emptyStateView = EmptyStateView()
-    let placeholderImage = UIImage(systemName: "person.crop.circle.badge.exclamationmark")
+class EmployeesListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EmployeesListViewModelDelegate {
     
+    private enum Constants {
+        static let placeholderImageName = "person.crop.circle.badge.exclamationmark"
+        static let title = "Employees"
+        static let cellIdentifier = "EmployeeTableViewCell"
+        static let ok = "Ok"
+    }
+    
+    let activityIndicator = UIActivityIndicatorView(style: .medium)
+    var tableView = UITableView()
+    var viewModel = EmployeesListViewModel(employeeAPI: EmployeeListAPI())
+    var emptyStateView = EmptyStateView()
+   
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(viewModel.loadData), for: .valueChanged)
         return refreshControl
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        loadData()
-        title = "Employees"
+        viewModel.loadData()
+        viewModel.delegate = self
+        title = Constants.title
     }
     
     func setupTableView() {
@@ -30,7 +38,7 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: "EmployeeTableViewCell")
+        tableView.register(EmployeeTableViewCell.self, forCellReuseIdentifier: Constants.cellIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -42,92 +50,42 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
         ])
     }
     
-    @objc func loadData() {
+    func loadingStarted() {
         self.refreshControl.beginRefreshing()
-        EmployeeListAPI.fetchEmployeesList { result in
-            DispatchQueue.main.async {
-                self.refreshControl.endRefreshing()
-                switch result {
-                case .failure:
-                    self.showAlert(title: "Error", message: "Couldn't load employees list.", okAction: nil)
-                    self.loadMalformedEmployeesList()
-                case .success(let response):
-                    self.emptyStateView.isHidden = true
-                    self.employeesList = response
-                    if self.employeesList == nil {
-                        self.loadEmptyList()
-                    }
-                    self.tableView.reloadData()
-                    self.activityIndicator.stopAnimating()
-                }
-            }
-        }
+        self.activityIndicator.startAnimating()
     }
     
-    func loadEmptyList() {
-        self.refreshControl.beginRefreshing()
-        EmployeeListAPI.fetchEmptyList { result in
-            DispatchQueue.main.async {
-                self.refreshControl.endRefreshing()
-                switch result {
-                case .failure:
-                    self.showAlert(title: "Error", message: "Couldn't load empty list.", okAction: nil)
-                case .success(let response):
-                    self.employeesList = response
-                    self.emptyStateView.isHidden = false
-                }
-                self.tableView.reloadData()
-                self.activityIndicator.stopAnimating()
-            }
-        }
+    func loadingEnded() {
+        self.refreshControl.endRefreshing()
+        self.tableView.reloadData()
+        self.activityIndicator.stopAnimating()
     }
     
-    func loadMalformedEmployeesList() {
-        self.refreshControl.beginRefreshing()
-        EmployeeListAPI.fetchMalformedEmployeesList { result in
-            DispatchQueue.main.async {
-                self.refreshControl.endRefreshing()
-                switch result {
-                case .failure:
-                    self.showAlert(title: "Error", message: "Couldn't load malformed employees list.", okAction: nil)
-                case .success(let response):
-                    self.employeesList = response
-                }
-                self.tableView.reloadData()
-                self.activityIndicator.stopAnimating()
-            }
-        }
+    func emptyViewIsHidden() {
+        self.emptyStateView.isHidden = true
+    }
+    
+    func emptyViewIsVisible() {
+        self.emptyStateView.isHidden = false
     }
     
     func showAlert(title: String, message: String, okAction: (() -> Void)?) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let okAction = UIAlertAction(title: Constants.ok, style: .default, handler: nil)
         alertVC.addAction(okAction)
         present(alertVC, animated: true, completion: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let employeesList else { return 0 }
-        return employeesList.employees.count
+        return viewModel.employeesCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "EmployeeTableViewCell", for: indexPath) as? EmployeeTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.cellIdentifier, for: indexPath) as? EmployeeTableViewCell,
+              let employeesList = viewModel.employeeModel(for: indexPath) else {
             fatalError("Couldn't configure the cell this time. Table View Cell should be registered.")
         }
-        if let employeesList = employeesList?.employees[indexPath.row] {
-            cell.fullName.text = "Name: \(employeesList.fullName)"
-            let formattedPhoneNumber = employeesList.phoneNumber.toPhoneNumber()
-            cell.phoneNumber.text = "Phone: \(formattedPhoneNumber)"
-            cell.email.text = "Email: \(employeesList.emailAddress)"
-            cell.biography.text = "Biography: \(employeesList.biography)"
-            cell.team.text = "Team: \(employeesList.team)"
-            cell.employeeType.text = "Employee type: \(employeesList.employeeType.description)"
-            cell.employeeImage.image = placeholderImage
-            if let employeeImage = URL(string: employeesList.smallPhotoURL) {
-                cell.employeeImage.downloadImage(from: employeeImage, placeholder: placeholderImage)
-            }
-        }
+        cell.configure(with: employeesList)
         return cell
     }
 }

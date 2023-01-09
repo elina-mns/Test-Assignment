@@ -1,46 +1,69 @@
 import UIKit
 
 class EmployeeTableViewCell: UITableViewCell {
-    var employeeImage: UIImageView = {
+    
+    private enum Constants {
+        static let placeholderImageName = "person.crop.circle.badge.exclamationmark"
+        static let cornerRadiusConstant = 20.0
+        static let employeeImageWidth = 120.0
+        static let paddingLarge = 20.0
+        static let paddingSmall = 10.0
+        static let paddingMedium = 15.0
+        static let name = "Name: "
+        static let phone = "Phone: "
+        static let email = "Email: "
+        static let biography = "Biography: "
+        static let team = "Team: "
+        static let employeeType = "Employee type: "
+    }
+    
+    private let placeholderImage = UIImage(systemName: Constants.placeholderImageName)
+    
+    private var employeeImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 20
+        imageView.layer.cornerRadius = Constants.cornerRadiusConstant
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .gray
         return imageView
     }()
 
-    var fullName: UILabel = {
+    private var fullName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    var phoneNumber: UILabel = {
+    
+    private var phoneNumber: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    var email: UILabel = {
+    
+    private var email: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    var biography: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        return label
-    }()
-    var team: UILabel = {
+    
+    private var biography: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
     }()
-    var employeeType: UILabel = {
+    
+    private var team: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        return label
+    }()
+    
+    private var employeeType: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -57,39 +80,39 @@ class EmployeeTableViewCell: UITableViewCell {
         addSubview(employeeType)
         
         NSLayoutConstraint.activate([
-            employeeImage.widthAnchor.constraint(equalToConstant: 120),
+            employeeImage.widthAnchor.constraint(equalToConstant: Constants.employeeImageWidth),
             employeeImage.widthAnchor.constraint(equalTo: employeeImage.heightAnchor),
-            employeeImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            employeeImage.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            employeeImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.paddingLarge),
+            employeeImage.topAnchor.constraint(equalTo: topAnchor, constant: Constants.paddingLarge),
 
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: -15),
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: team.leadingAnchor, constant: -15),
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: employeeType.leadingAnchor, constant: -15),
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: phoneNumber.leadingAnchor, constant: -15)
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: -Constants.paddingMedium),
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: team.leadingAnchor, constant: -Constants.paddingMedium),
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: employeeType.leadingAnchor, constant: -Constants.paddingMedium),
+            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: phoneNumber.leadingAnchor, constant: -Constants.paddingMedium)
         ])
 
         employeeImage.setContentCompressionResistancePriority(.required, for: .horizontal)
         
-        fullName.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
-        fullName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        fullName.topAnchor.constraint(equalTo: topAnchor, constant: Constants.paddingLarge).isActive = true
+        fullName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
-        team.topAnchor.constraint(equalTo: fullName.bottomAnchor, constant: 10).isActive = true
-        team.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        team.topAnchor.constraint(equalTo: fullName.bottomAnchor, constant: Constants.paddingSmall).isActive = true
+        team.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
-        employeeType.topAnchor.constraint(equalTo: team.bottomAnchor, constant: 10).isActive = true
-        employeeType.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        employeeType.topAnchor.constraint(equalTo: team.bottomAnchor, constant: Constants.paddingSmall).isActive = true
+        employeeType.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
-        phoneNumber.topAnchor.constraint(equalTo: employeeType.bottomAnchor, constant: 10).isActive = true
-        phoneNumber.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        phoneNumber.topAnchor.constraint(equalTo: employeeType.bottomAnchor, constant: Constants.paddingSmall).isActive = true
+        phoneNumber.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
-        email.topAnchor.constraint(equalTo: employeeImage.bottomAnchor, constant: 15).isActive = true
-        email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 20).isActive = true
+        email.topAnchor.constraint(equalTo: employeeImage.bottomAnchor, constant: Constants.paddingMedium).isActive = true
+        email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.paddingLarge).isActive = true
+        email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
-        biography.topAnchor.constraint(equalTo: email.bottomAnchor, constant: 10).isActive = true
-        biography.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20).isActive = true
-        biography.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
-        biography.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20).isActive = true
+        biography.topAnchor.constraint(equalTo: email.bottomAnchor, constant: Constants.paddingSmall).isActive = true
+        biography.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.paddingLarge).isActive = true
+        biography.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.paddingLarge).isActive = true
+        biography.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.paddingLarge).isActive = true
         selectionStyle = .none
     }
     
@@ -98,5 +121,19 @@ class EmployeeTableViewCell: UITableViewCell {
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
+    }
+    
+    func configure(with model: EmployeeModel) {
+        fullName.text = "\(Constants.name + model.fullName)"
+        let formattedPhoneNumber = model.phoneNumber.toPhoneNumber()
+        phoneNumber.text = "\(Constants.phone + formattedPhoneNumber)"
+        email.text = "\(Constants.email + model.emailAddress)"
+        biography.text = "\(Constants.biography + model.biography)"
+        team.text = "\(Constants.team + model.team)"
+        employeeType.text = "\(Constants.employeeType + model.employeeType.description)"
+        employeeImage.image = placeholderImage
+        if let employeeImageURL = URL(string: model.smallPhotoURL) {
+            employeeImage.downloadImage(from: employeeImageURL, placeholder: placeholderImage)
+        }
     }
 }

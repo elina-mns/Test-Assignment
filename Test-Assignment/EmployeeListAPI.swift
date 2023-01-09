@@ -1,6 +1,12 @@
 import UIKit
 
-class EmployeeListAPI {
+protocol EmployeeAPIProtocol {
+    func fetchEmployeesList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void)
+    func fetchMalformedEmployeesList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void)
+    func fetchEmptyList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void)
+}
+
+class EmployeeListAPI: EmployeeAPIProtocol {
     
     enum APIError: Error {
         case badResponse
@@ -27,19 +33,19 @@ class EmployeeListAPI {
         }
     }
     
-    class func fetchEmployeesList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void) {
+    func fetchEmployeesList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void) {
         fetch(endpoint: EndPoints.employees, completion: completionHandler)
     }
     
-    class func fetchMalformedEmployeesList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void) {
+    func fetchMalformedEmployeesList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void) {
         fetch(endpoint: EndPoints.malformedEmployees, completion: completionHandler)
     }
     
-    class func fetchEmptyList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void) {
+    func fetchEmptyList(completionHandler: @escaping (Result<EmployeesListModel, Error>) -> Void) {
         fetch(endpoint: EndPoints.emptyList, completion: completionHandler)
     }
     
-    class func fetch<Success: Decodable>(endpoint: EndPoints, completion: @escaping (Result<Success, Error>) -> Void) {
+    private func fetch<Success: Decodable>(endpoint: EndPoints, completion: @escaping (Result<Success, Error>) -> Void) {
         let request = URLRequest(url: endpoint.url)
         let task = URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
             guard let data = data else {
