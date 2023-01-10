@@ -9,12 +9,12 @@ class EmployeeTableViewCell: UITableViewCell {
         static let paddingLarge = 20.0
         static let paddingSmall = 10.0
         static let paddingMedium = 15.0
-        static let name = "Name: "
-        static let phone = "Phone: "
-        static let email = "Email: "
-        static let biography = "Biography: "
-        static let team = "Team: "
-        static let employeeType = "Employee type: "
+        static let name = NSLocalizedString("name", comment: "")
+        static let phone = NSLocalizedString("phone", comment: "")
+        static let email = NSLocalizedString("email", comment: "")
+        static let biography = NSLocalizedString("biography", comment: "")
+        static let team = NSLocalizedString("team", comment: "")
+        static let employeeType = NSLocalizedString("employee_type", comment: "")
     }
     
     private let placeholderImage = UIImage(systemName: Constants.placeholderImageName)
@@ -31,24 +31,28 @@ class EmployeeTableViewCell: UITableViewCell {
 
     private var fullName: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private var phoneNumber: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private var email: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private var biography: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -57,6 +61,7 @@ class EmployeeTableViewCell: UITableViewCell {
     
     private var team: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
@@ -65,6 +70,7 @@ class EmployeeTableViewCell: UITableViewCell {
     
     private var employeeType: UILabel = {
         let label = UILabel()
+        label.adjustsFontForContentSizeCategory = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -85,10 +91,10 @@ class EmployeeTableViewCell: UITableViewCell {
             employeeImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.paddingLarge),
             employeeImage.topAnchor.constraint(equalTo: topAnchor, constant: Constants.paddingLarge),
 
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: fullName.leadingAnchor, constant: -Constants.paddingMedium),
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: team.leadingAnchor, constant: -Constants.paddingMedium),
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: employeeType.leadingAnchor, constant: -Constants.paddingMedium),
-            employeeImage.trailingAnchor.constraint(greaterThanOrEqualTo: phoneNumber.leadingAnchor, constant: -Constants.paddingMedium)
+            employeeImage.trailingAnchor.constraint(equalTo: fullName.leadingAnchor, constant: -Constants.paddingMedium),
+            employeeImage.trailingAnchor.constraint(equalTo: team.leadingAnchor, constant: -Constants.paddingMedium),
+            employeeImage.trailingAnchor.constraint(equalTo: employeeType.leadingAnchor, constant: -Constants.paddingMedium),
+            employeeImage.trailingAnchor.constraint(equalTo: phoneNumber.leadingAnchor, constant: -Constants.paddingMedium)
         ])
 
         employeeImage.setContentCompressionResistancePriority(.required, for: .horizontal)
@@ -97,7 +103,7 @@ class EmployeeTableViewCell: UITableViewCell {
         fullName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
         team.topAnchor.constraint(equalTo: fullName.bottomAnchor, constant: Constants.paddingSmall).isActive = true
-        team.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
+        team.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.paddingLarge).isActive = true
         
         employeeType.topAnchor.constraint(equalTo: team.bottomAnchor, constant: Constants.paddingSmall).isActive = true
         employeeType.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
@@ -105,7 +111,7 @@ class EmployeeTableViewCell: UITableViewCell {
         phoneNumber.topAnchor.constraint(equalTo: employeeType.bottomAnchor, constant: Constants.paddingSmall).isActive = true
         phoneNumber.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
-        email.topAnchor.constraint(equalTo: employeeImage.bottomAnchor, constant: Constants.paddingMedium).isActive = true
+        email.topAnchor.constraint(equalTo: phoneNumber.bottomAnchor, constant: Constants.paddingMedium).isActive = true
         email.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.paddingLarge).isActive = true
         email.trailingAnchor.constraint(equalTo: trailingAnchor, constant: Constants.paddingLarge).isActive = true
         
@@ -125,12 +131,18 @@ class EmployeeTableViewCell: UITableViewCell {
     
     func configure(with model: EmployeeModel) {
         fullName.text = "\(Constants.name + model.fullName)"
+        fullName.accessibilityLabel = "\(Constants.name + model.fullName)"
         let formattedPhoneNumber = model.phoneNumber.toPhoneNumber()
         phoneNumber.text = "\(Constants.phone + formattedPhoneNumber)"
+        phoneNumber.accessibilityLabel = "\(Constants.phone + formattedPhoneNumber)"
         email.text = "\(Constants.email + model.emailAddress)"
+        email.accessibilityLabel = "\(Constants.email + model.emailAddress)"
         biography.text = "\(Constants.biography + model.biography)"
+        biography.accessibilityLabel = "\(Constants.biography + model.biography)"
         team.text = "\(Constants.team + model.team)"
+        team.accessibilityLabel = "\(Constants.team + model.team)"
         employeeType.text = "\(Constants.employeeType + model.employeeType.description)"
+        employeeType.accessibilityLabel = "\(Constants.employeeType + model.employeeType.description)"
         employeeImage.image = placeholderImage
         if let employeeImageURL = URL(string: model.smallPhotoURL) {
             employeeImage.downloadImage(from: employeeImageURL, placeholder: placeholderImage)

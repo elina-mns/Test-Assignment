@@ -38,13 +38,13 @@ class EmployeesListViewModel {
     
     private func processResult(result: Result<EmployeesListModel, Error>) {
         DispatchQueue.main.async {
-            self.delegate?.loadingEnded()
             switch result {
             case .failure(let error):
                 self.processFailure(error: error)
             case .success(let response):
                 self.processSuccess(employeesList: response)
             }
+            self.delegate?.loadingEnded()
         }
     }
     

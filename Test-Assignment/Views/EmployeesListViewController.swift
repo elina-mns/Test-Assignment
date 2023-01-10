@@ -16,16 +16,18 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
    
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(viewModel.loadData), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(reloadData), for: .valueChanged)
         return refreshControl
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        viewModel.loadData()
-        viewModel.delegate = self
         title = Constants.title
+        
+        setupTableView()
+        
+        viewModel.delegate = self
+        viewModel.loadData()
     }
     
     func setupTableView() {
@@ -48,6 +50,10 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
             emptyStateView.topAnchor.constraint(equalTo: view.topAnchor),
             emptyStateView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
+    }
+    
+    @objc private func reloadData() {
+        viewModel.loadData()
     }
     
     func loadingStarted() {
