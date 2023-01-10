@@ -11,7 +11,6 @@ protocol EmployeesListViewModelDelegate: AnyObject {
 class EmployeesListViewModel {
     
     private var employeeAPI: EmployeeAPIProtocol
-    
     weak var delegate: EmployeesListViewModelDelegate?
     private var employeesList: EmployeesListModel?
     var employeesCount: Int {
@@ -39,6 +38,7 @@ class EmployeesListViewModel {
     
     private func processResult(result: Result<EmployeesListModel, Error>) {
         DispatchQueue.main.async {
+            self.delegate?.loadingEnded()
             switch result {
             case .failure(let error):
                 self.processFailure(error: error)
@@ -49,9 +49,12 @@ class EmployeesListViewModel {
     }
     
     private func processFailure(error: Error) {
+        delegate?.emptyViewIsVisible()
         delegate?.showAlert(title: "Error",
-                            message: "Couldn't load employees list.",
-                            okAction: nil)
+                            message: "Couldn't load employees list. Press Ok to try again.",
+                            okAction: { [weak self] in
+            self?.loadData()
+        })
     }
     
     private func processSuccess(employeesList: EmployeesListModel) {
@@ -61,7 +64,6 @@ class EmployeesListViewModel {
         } else {
             delegate?.emptyViewIsHidden()
         }
-        delegate?.loadingEnded()
     }
     
     private func loadEmptyList() {

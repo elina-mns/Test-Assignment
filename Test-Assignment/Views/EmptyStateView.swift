@@ -8,14 +8,15 @@ class EmptyStateView: UIView {
         static let emptyImageWidth = 150.0
         static let emptyLabelTopPadding = 20.0
     }
-    var emptyLabel: UILabel = {
+    private var emptyLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = Constants.emptyLabelText
         label.textColor = .gray
         return label
     }()
-    var emptyStateImage: UIImageView = {
+    
+    private var emptyStateImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
