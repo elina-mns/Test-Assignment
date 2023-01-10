@@ -4,3 +4,5 @@
 "biography" = "Biographie: ";
 "team" = "Équipe: ";
 "employee_type" = "Type d'employé: ";
+"error_title" = "Erreur";
+"error_message" = "Impossible de charger la liste des employés. Appuyez sur OK pour réessayer.";

@@ -4,3 +4,5 @@
 "biography" = "Biography: ";
 "team" = "Team: ";
 "employee_type" = "Employee Type: ";
+"error_title" = "Error";
+"error_message" = "Couldn't load employees list. Press Ok to try again.";
