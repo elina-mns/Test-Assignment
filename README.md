@@ -5,6 +5,18 @@
 * Download the project from repository
 * Run "Test-Assignment.xcodeproj"
 
+## View States
+
+<img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/1.png"
+width=300, height=550,
+align="left"/>
+<img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/2.png"
+width=300, height=550,
+align="center"/>
+<img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/3.png"
+width=300, height=550,
+align="right"/>
+
 ## What areas of the app did you focus on?
 * MVVM pattern
 * Clean and readable code
@@ -19,7 +31,8 @@
     ~ 10 hours 
 
 ## Did you make any trade-offs for this project? What would you have done differently with more time?
-    I would create a custom view which would represent an employee card. It would look like a real business card with custom fonts and colours. 
+    I would create a custom view which would represent an employee card. 
+    It would look like a real business card with custom fonts and colours. 
 
 ## What do you think is the weakest part of your project?
 * UI
