@@ -23,19 +23,23 @@ class EmployeesListViewController: UIViewController, UITableViewDelegate, UITabl
     override func viewDidLoad() {
         super.viewDidLoad()
         title = Constants.title
-        
-        setupTableView()
-        
+        setupViews()
         viewModel.delegate = self
         viewModel.loadData()
     }
     
-    func setupTableView() {
+    private func setupViews() {
         view.addSubview(tableView)
         view.addSubview(emptyStateView)
+        view.addSubview(activityIndicator)
+        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
         tableView.addSubview(refreshControl)
         emptyStateView.translatesAutoresizingMaskIntoConstraints = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true

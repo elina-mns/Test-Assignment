@@ -83,13 +83,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		3143340C296CDAAE00A37D54 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		314DEF922967C6860013DFE7 = {
 			isa = PBXGroup;
 			children = (
@@ -119,7 +112,6 @@
 				314DEFCE2967C9940013DFE7 /* ViewModel */,
 				314DEFD52968E5D80013DFE7 /* Views */,
 				314334032969372100A37D54 /* Extensions */,
-				3143340C296CDAAE00A37D54 /* New Group */,
 				314DEFA72967C6870013DFE7 /* Assets.xcassets */,
 				314DEFAC2967C6870013DFE7 /* Info.plist */,
 			);
