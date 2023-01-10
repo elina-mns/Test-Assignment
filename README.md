@@ -7,15 +7,9 @@
 
 ## View States
 
-<img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/1.png"
-width=200,
-align="left"/>
-<img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/2.png"
-width=200,
-align="center"/>
-<img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/3.png"
-width=200,
-align="right"/>
+| List  | Empty List | Malformed |
+| --- | --- | --- |
+| <img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/1.png"/> | <img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/2.png"/> | <img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/3.png"/> |
 
 ## What areas of the app did you focus on?
 * MVVM pattern
