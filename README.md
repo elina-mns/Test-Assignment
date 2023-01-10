@@ -8,13 +8,13 @@
 ## View States
 
 <img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/1.png"
-width=300, height=550,
+width=200,
 align="left"/>
 <img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/2.png"
-width=300, height=550,
+width=200,
 align="center"/>
 <img src="https://github.com/elina-mns/Test-Assignment/blob/main/Test-Assignment/Assets.xcassets/3.png"
-width=300, height=550,
+width=200,
 align="right"/>
 
 ## What areas of the app did you focus on?
