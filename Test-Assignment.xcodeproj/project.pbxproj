@@ -86,7 +86,6 @@
 		314DEF922967C6860013DFE7 = {
 			isa = PBXGroup;
 			children = (
-				312516C3296D02F4008C86C1 /* Localizable.strings */,
 				314DEF9D2967C6860013DFE7 /* Test-Assignment */,
 				314DEFB42967C6870013DFE7 /* Test-AssignmentTests */,
 				314DEF9C2967C6860013DFE7 /* Products */,
@@ -113,6 +112,7 @@
 				314DEFD52968E5D80013DFE7 /* Views */,
 				314334032969372100A37D54 /* Extensions */,
 				314DEFA72967C6870013DFE7 /* Assets.xcassets */,
+				312516C3296D02F4008C86C1 /* Localizable.strings */,
 				314DEFAC2967C6870013DFE7 /* Info.plist */,
 			);
 			path = "Test-Assignment";

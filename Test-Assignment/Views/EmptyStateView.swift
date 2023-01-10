@@ -3,7 +3,7 @@ import UIKit
 class EmptyStateView: UIView {
     
     private enum Constants {
-        static let emptyLabelText = "The list is empty."
+        static let emptyLabelText = NSLocalizedString("list_empty_label", comment: "")
         static let emptyImageName = "exclamationmark.icloud"
         static let emptyImageWidth = 150.0
         static let emptyLabelTopPadding = 20.0

@@ -6,3 +6,4 @@
 "employee_type" = "Type d'employé: ";
 "error_title" = "Erreur";
 "error_message" = "Impossible de charger la liste des employés. Appuyez sur OK pour réessayer.";
+"list_empty_label" = "La liste est vide.";

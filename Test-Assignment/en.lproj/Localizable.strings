@@ -6,3 +6,4 @@
 "employee_type" = "Employee Type: ";
 "error_title" = "Error";
 "error_message" = "Couldn't load employees list. Press Ok to try again.";
+"list_empty_label" = "The list is empty.";

@@ -50,8 +50,8 @@ class EmployeesListViewModel {
     
     private func processFailure(error: Error) {
         delegate?.emptyViewIsVisible()
-        delegate?.showAlert(title: "Error",
-                            message: "Couldn't load employees list. Press Ok to try again.",
+        delegate?.showAlert(title: NSLocalizedString("error_title", comment: ""),
+                            message: NSLocalizedString("error_message", comment: ""),
                             okAction: { [weak self] in
             self?.loadData()
         })

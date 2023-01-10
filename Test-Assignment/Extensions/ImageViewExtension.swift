@@ -1,7 +1,6 @@
 import UIKit
 
 extension UIImageView {
-    
     func downloadImage(from url: URL, placeholder: UIImage?) {
         DispatchQueue.global().async {
             let cache = URLCache.shared
